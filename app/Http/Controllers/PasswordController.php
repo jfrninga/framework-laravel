@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\Rules\Password as PasswordRules;
 
 
-class PasswordControler extends Controller
+class PasswordController extends Controller
 {
     public function forgotten()
     {
-        return view('auth.password.forgotten');
+        return view('auth.forgot-password');
     }
 
     public function sendEmail(Request $request)
@@ -36,7 +36,7 @@ class PasswordControler extends Controller
 
     public function reset(string $token, Request $request)
     {
-        return view('auth.password.reset',['token' => $token, 'email' => $request->input('email')]);
+        return view('auth.reset-password    ',['token' => $token, 'email' => $request->input('email')]);
     }
 
     public function update(Request $request)

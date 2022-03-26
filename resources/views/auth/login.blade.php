@@ -7,7 +7,7 @@
         <h1 class="card-header text-center">Login</h1>
 
         <div class="card-body">
-            <form action="{{ route('auth.authenticate') }}" method="post">
+            <form action="{{ route('auth.authenticate') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email:</label>

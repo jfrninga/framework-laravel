@@ -68,6 +68,10 @@
         width: 30%;
         margin: auto;
     }
+    a{
+        text-decoration: none;
+        color: #000000;
+    }
     footer {
         margin-top: 50px;
     }

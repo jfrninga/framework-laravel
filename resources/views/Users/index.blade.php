@@ -12,7 +12,7 @@
                     <div class="bottom">
                         {{ $user->name }} <br>
                         {{ $user->email }} <br>
-                        <a href="{{route('users.show', $user)}}">Voir plus</a>
+                        <button type="button" class="btn btn-info mb-3"><a href="{{route('users.show', $user)}}">Voir plus</a></button>
                     </div>
                 </li>
             @endforeach

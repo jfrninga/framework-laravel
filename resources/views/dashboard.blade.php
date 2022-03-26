@@ -1,17 +1,44 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layout')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
-                </div>
-            </div>
-        </div>
+@section('content')
+
+    <h1 class="my-4">Tableau de bord</h1>
+    <div class="dashboard">
+        <ul class="d-flex flex-column pl-0">
+            @foreach($users as $user)
+                <li class="d-flex align-items-center justify-content-between flex-wrap p-3">
+                    <div class="profil d-flex flex-wrap mr-2">
+                        <div class="name">{{ $user->name }}</div>
+                        <div class="email">{{ $user->email }}</div>
+                        <div class="status">
+                            @if($user->is_admin)
+                                <span class="admin">admin</span>
+                            @endif
+                            @if(!$user->is_admin)
+                                <span class="not-admin">non admin</span>
+                            @endif
+                        </div>
+                    </div>
+                    <a href="{{route('users.show', $user)}}" class="showmore"></a>
+                    <div class="actions d-flex flex-wrap align-items-center">
+                        <div class="edit mr-2">
+                            <a href="{{route('users.edit', $user)}}" class="btn btn-warning my-1">Modifier</a>
+                        </div>
+                        @if(Auth::user() != $user && Auth::user()->is_admin)
+                            <div class="delete">
+                                <form action="{{route('users.destroy', $user)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" id="destroy" name="destroy" value="Supprimer"
+                                           class="btn btn-danger">
+                                </form>
+                            </div>
+                        @endif
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+        <a class="btn btn-primary mr-5" href="{{ route('users.create') }}">Ajouter un utilisateur</a>
     </div>
-</x-app-layout>
+
+@endsection

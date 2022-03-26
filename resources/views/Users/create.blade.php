@@ -43,10 +43,10 @@
 {{--                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">--}}
 {{--                </div>--}}
             </div>
-            <div class="text my-3">
-                <label for="avatar_url">Photo de profil :</label>
-                <input type="text" id="avatar_url" name="avatar_url" class="form-control">
-            </div>
+{{--            <div class="text my-3">--}}
+{{--                <label for="avatar_url">Photo de profil :</label>--}}
+{{--                <input type="text" id="avatar_url" name="avatar_url" class="form-control">--}}
+{{--            </div>--}}
             <input class="btn btn-primary" type="submit" id="submit" value="Ajouter l'utilisateur">
         </form>
     </div>

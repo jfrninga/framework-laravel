@@ -26,21 +26,33 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="text my-3 col">
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ $user->password }}">
-                    @error('password')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="text my-3 col">
-                    <label for="avatar_url">Photo de profil :</label>
-                    <input type="text" id="avatar_url" name="avatar_url" class="form-control @error('avatar_url') is-invalid @enderror" value="{{ $user->avatar_url }}">
-                    @error('avatar_url')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+{{--                <div class="text my-3 col">--}}
+{{--                    <label for="password">Mot de passe :</label>--}}
+{{--                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ $user->password }}">--}}
+{{--                    @error('password')--}}
+{{--                    <div class="invalid-feedback">{{ $message }}</div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+{{--                <div class="text my-3 col">--}}
+{{--                    <label for="avatar_url">Photo de profil :</label>--}}
+{{--                    <input type="text" id="avatar_url" name="avatar_url" class="form-control @error('avatar_url') is-invalid @enderror" value="{{ $user->avatar_url }}">--}}
+{{--                    @error('avatar_url')--}}
+{{--                    <div class="invalid-feedback">{{ $message }}</div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
             </div>
+
+            <div class="form-row">
+                @if(Auth::user()->is_admin && Auth::user() != $user)
+                    <div class="text my-3 col">
+                        <select id="is_admin" name="is_admin" class="form-select">
+                            <option value="0" @if (!$user->is_admin) selected @endif>Non admin</option>
+                            <option value="1" @if ($user->is_admin) selected @endif >Admin</option>
+                        </select>
+                    </div>
+                @endif
+            </div>
+
             <input class="btn btn-primary" type="submit" id="submit" value="Modifier l'utilisateur">
         </form>
     </div>
