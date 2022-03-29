@@ -13,11 +13,13 @@
                     <a href="{{ route('users.index') }}" class="nav-link">User List</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('users.create') }}" class="nav-link">Create new user</a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ route('auth.logout') }}" class="nav-link">Logout</a>
                 </li>
+                @if(Auth::user()->is_admin)
+                    <li class="nav-item">
+                        <a href="{{ route('users.create') }}" class="nav-link">Create new user</a>
+                    </li>
+                @endif
             @else
                 <li class="nav-item">
                     <a href="{{ route('auth.login') }}" class="nav-link">Log in</a>
@@ -26,11 +28,12 @@
                     <a href="{{ route('auth.register') }}" class="nav-link">Register</a>
                 </li>
             @endif
+
         </ul>
     </nav>
-    @auth
-        Hello {{ \Illuminate\Support\Facades\Auth::user()->name }}!
-    @endauth
+{{--    @auth--}}
+{{--        Hello {{ \Illuminate\Support\Facades\Auth::user()->name }}!--}}
+{{--    @endauth--}}
 </header>
 <main>
     @yield('content')
@@ -41,6 +44,18 @@
 <style>
     body {
 
+    }
+    .admin{color: #ff00d8
+    }
+    .not-admin{color: #002dff}
+
+    ul li img {
+        width: 30%;
+    }
+    ul li{
+        list-style: none;
+        margin: 10px;
+        padding-top: 7px;
     }
     .user-label {
         font-weight: bold;
@@ -54,7 +69,7 @@
         object-fit: cover;
     }
     header {
-        margin-bottom: 70px;
+        margin-bottom: 40px;
     }
     #users-container {
         width: 80%;
@@ -71,6 +86,15 @@
     a{
         text-decoration: none;
         color: #000000;
+    }
+    div.left, div.right{
+        width: calc(30% - 40px);
+        display: inline-block;
+        vertical-align: top;
+        padding: 20px;
+    }
+    div.left img{
+        max-width: 80%;
     }
     footer {
         margin-top: 50px;

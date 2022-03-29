@@ -22,24 +22,24 @@ class Login extends Controller
         ]);
 
 
-        if (Auth::attempt($credentials) && ! Auth::user()->is_admin) {
-            return redirect()->intended(route('users.index'));
-        } elseif (Auth::attempt($credentials) && Auth::user()->is_admin){
-            return redirect(route('dashboard'));
-        }
-
-        return redirect(route('auth.login'));
-
-
-//        if (Auth::attempt($credentials)) {
-//            $request->session()->regenerate();
-//
+//        if (Auth::attempt($credentials) && ! Auth::user()->is_admin) {
 //            return redirect()->intended(route('users.index'));
+//        } elseif (Auth::attempt($credentials) && Auth::user()->is_admin){
+//            return redirect(route('dashboard'));
 //        }
 //
-//        return back()->withErrors([
-//            'email' => 'Email or Password incorrect',
-//        ]);
+//        return redirect(route('auth.login'));
+
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('users.index'));
+        }
+
+        return back()->withErrors([
+            'email' => 'Email or Password incorrect',
+        ]);
     }
     public function register ()
     {

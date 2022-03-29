@@ -38,7 +38,7 @@ Route::resource('users', UsersController::class)->middleware(Authenticate::class
 Route::get('/login', [Login::class, 'login'])->name('auth.login');
 Route::post('/login', [Login::class, 'authenticate'])->name('auth.authenticate');
 Route::get('/register', [Login::class, 'register'])->name('auth.register');
-Route::post('/registration', [Login::class, 'registration'])->name('auth.registration');
+Route::post('/register', [Login::class, 'registration'])->name('auth.registration');
 Route::get('/logout', [Login::class, 'logout'])->name('auth.logout');
 
 Route::get('/password', [PasswordController::class, 'forgotten'])->name('password.forgotten');
@@ -46,6 +46,6 @@ Route::post('/password', [PasswordController::class, 'sendEmail'])->name('passwo
 Route::get('/password/reset/{token}', [PasswordController::class, 'reset'])->name('password.reset');
 Route::post('/password/reset/{token}', [PasswordController::class, 'update'])->name('password.update');
 
-Route::get('/profile', [Login::class, 'login'])->name('auth.login')->middleware(Admin::class);
-
-Route::get('/dashboard', [Login::class, 'dashboard'])->name('dashboard')->middleware('admin');
+//Route::get('/profile', [Login::class, 'login'])->name('auth.login')->middleware(Admin::class);
+//
+//Route::get('/dashboard', [Login::class, 'dashboard'])->name('dashboard')->middleware('admin');

@@ -4,18 +4,29 @@
 
 
     <div class="my-4">
-
-        <div class="pl-2">
+        <div class="left">
+            <img src="{{ $user->avatar_url }}" alt="" title=""/>
+        </div>
+        <div class="right pl-2">
             <h1>{{ $user->name }}</h1>
             <h2>{{ $user->email }}</h2>
 
-            <div class="my-4">
-                <a href="<?= url('/users'); ?>" title="">Retour à la liste</a>
+            <div class="my-3 btn btn-light">
+                <a href="<?= url('/users'); ?>" title="">Back to the list</a>
+            </div>
+
+            <div class="status">
+                @if($user->is_admin)
+                    <span class="admin">admin</span>
+                @endif
+                @if(!$user->is_admin)
+                    <span class="not-admin">non admin</span>
+                @endif
             </div>
 
             @if(Auth::user() == $user || Auth::user()->is_admin)
                 <div class="bottom d-flex align-items-center justify-content-between">
-                    <a href="{{route('users.edit', $user)}}" class="btn btn-warning my-1">Modifier l'utilisateur</a>
+                    <a href="{{route('users.edit', $user)}}" class="btn btn-warning my-4">Edit user</a>
                 </div>
             @endif
 
@@ -25,7 +36,7 @@
                     <form action="{{route('users.destroy', $user)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <input type="submit" id="destroy" name="destroy" value="Supprimer l'utilisateur"
+                        <input type="submit" id="destroy" name="destroy" value="Delete user"
                                class="btn btn-danger">
                     </form>
                 </div>

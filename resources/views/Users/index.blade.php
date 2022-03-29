@@ -10,9 +10,9 @@
                 <li>
                     <div class="top"><img src="{{ $user->avatar_url }}" alt=""/></div>
                     <div class="bottom">
-                        {{ $user->name }} <br>
-                        {{ $user->email }} <br>
-                        <button type="button" class="btn btn-info mb-3"><a href="{{route('users.show', $user)}}">Voir plus</a></button>
+                        <h3>{{ $user->name }}</h3> <br>
+                        <h3>{{ $user->email }}</h3>  <br>
+                        <button type="button" class="btn btn-info mb-3"><a href="{{route('users.show', $user)}}">view</a></button>
                     </div>
                 </li>
             @endforeach

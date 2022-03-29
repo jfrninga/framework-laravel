@@ -33,13 +33,13 @@
 {{--                    <div class="invalid-feedback">{{ $message }}</div>--}}
 {{--                    @enderror--}}
 {{--                </div>--}}
-{{--                <div class="text my-3 col">--}}
-{{--                    <label for="avatar_url">Photo de profil :</label>--}}
-{{--                    <input type="text" id="avatar_url" name="avatar_url" class="form-control @error('avatar_url') is-invalid @enderror" value="{{ $user->avatar_url }}">--}}
-{{--                    @error('avatar_url')--}}
-{{--                    <div class="invalid-feedback">{{ $message }}</div>--}}
-{{--                    @enderror--}}
-{{--                </div>--}}
+                <div class="text my-3 col">
+                    <label for="avatar_url">Photo de profil :</label>
+                    <input type="text" id="avatar_url" name="avatar_url" class="form-control @error('avatar_url') is-invalid @enderror" value="{{ $user->avatar_url }}">
+                    @error('avatar_url')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
 
             <div class="form-row">

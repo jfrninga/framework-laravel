@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdateUserFormRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +27,11 @@ class UsersController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $input = $request->safe()->only(['name', 'email', 'password']);
+        $input = $request->safe()->only(['name', 'email', 'password', 'avatar_url']);
         // $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('users.index');
 
 //        return redirect()->route('users.index');
     }
@@ -51,19 +51,20 @@ class UsersController extends Controller
     }
 
 
-    public function update(UpdateUserFormRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
 
+        // ça te permet de modifier un utilisateur en tant que admin
         if (Auth::user()->is_admin){
-            $input = $request->only(['name', 'email', 'is_admin']);
+            $input = $request->only(['name', 'email', 'is_admin', 'avatar_url']);
         } else {
-            $input = $request->only(['name', 'email']);
+            $input = $request->only(['name', 'email', 'avatar_url']);
         }
 
         $user->update($input);
 
         if (Auth::user()->is_admin){
-            return redirect()->route('dashboard');
+            return redirect()->route('users.index');
         } else {
             return redirect()->route('users.index');
         }
@@ -79,13 +80,13 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
 
-        if (Auth::user() === $user){
+        if (Auth::user() == $user){
             $user->delete();
         } else {
             return redirect()->back()->with('not-allowed', 'No access try another page');
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('auth.login');
 
 
 //        $user->delete();
